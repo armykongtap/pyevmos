@@ -26,17 +26,15 @@ classifiers = [
 ]
 keywords = ["blockchain", "sdk", "ethereum"]
 dependencies = [
-    "eth-abi ~= 3.0",
-    "eth-account ~= 0.7.0",
-    "eth-hash ~= 0.3",
+    "eth-abi >= 3.0",
+    "eth-account >= 0.7.0",
+    "eth-hash >= 0.3",
     "eth-typing >= 3.1",
-    "eth-utils ~= 2.0",
-
-    "hexbytes ~= 0.3.0",
-    "bech32 ~= 1.2",
-    "typing_extensions ~= 4.3",
-    "requests ~= 2.28",
-    "alt-betterproto ~= 2.0.1",
+    "eth-utils >= 2.0",
+    "hexbytes >= 0.3.0",
+    "bech32 >= 1.2",
+    "typing_extensions >= 4.3",
+    "requests >= 2.28",
 ]
 requires-python = ">=3.8"
 
@@ -45,7 +43,7 @@ version = {attr = "evmos.__version__"}
 
 [project.optional-dependencies]
 dev = [
-    "alt-betterproto[compiler] ~= 2.0.1",
+    "alt-betterproto[compiler] >= 2.0.1",
     "pre-commit",
 ]
 test = [
@@ -54,8 +52,8 @@ test = [
     "python-dotenv",
 ]
 docs = [
-    'docutils >=0.16, <0.18',  # Sphinx haven't upgraded yet
-    "sphinx >=5.1.1, <6.0",
+    'docutils >=0.16',  # Sphinx haven't upgraded yet
+    "sphinx >=5.1.1",
     "sphinx-rtd-theme",
 ]
 
