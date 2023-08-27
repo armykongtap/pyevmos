@@ -48,6 +48,8 @@ class Sender:
     """Internal account number."""
     pubkey: str = ''
     """Account public key."""
+    pubkey_type: str = '/ethermint.crypto.v1.ethsecp256k1.PubKey'
+    """Public key type."""
 
     def update_from_chain(self, url: str = 'http://127.0.0.1:1317') -> None:
         """Set `sequence`, `account_number` and possibly `pubkey` from API response."""
@@ -60,7 +62,12 @@ class Sender:
         self.account_number = int(resp['account']['base_account']['account_number'])
         if not self.pubkey:
             self.pubkey = resp['account']['base_account']['pub_key']['key']
+            self.pubkey_type = resp['account']['base_account']['pub_key']['@type']
 
+    @property
+    def algo(self) -> str:
+        """Public key algorithm."""
+        return self.pubkey_type.split('.')[-2]
 
 @dataclass
 class Chain:
@@ -105,7 +112,7 @@ def to_generated_base(
             fee.amount,
             fee.denom,
             int(fee.gas),
-            'ethsecp256',
+            sender.algo,
             sender.pubkey,
             sender.sequence,
             sender.account_number,
@@ -230,7 +237,7 @@ def to_generated(
             fee.amount,
             fee.denom,
             int(fee.gas),
-            'ethsecp256',
+            sender.algo,
             sender.pubkey,
             sender.sequence,
             sender.account_number,
