@@ -102,7 +102,7 @@ def sign_transaction(
     )
     return {
         'tx_bytes': base64.b64encode(bytes(signed_tx.message)).decode(),
-        'mode': 'BROADCAST_MODE_BLOCK',
+        'mode': broadcast_mode,
     }
 
 
