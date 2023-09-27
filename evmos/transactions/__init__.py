@@ -60,31 +60,31 @@ from evmos.transactions.staking import (
 from evmos.transactions.validator import create_tx_msg_edit_validator
 
 __all__ = [
-    'create_tx_msg_vote',
-    'create_tx_ibc_msg_transfer',
-    'create_message_send',
-    'create_tx_raw_eip712',
-    'signature_to_web3_extension',
-    'Chain',
-    'Fee',
-    'Sender',
-    'TxGeneratedBase',
-    'TxGenerated',
-    'create_tx_msg_stake_authorization',
-    'create_tx_msg_stake_revoke_authorization',
-    'create_tx_msg_convert_coin',
-    'create_tx_msg_convert_erc20',
-    'create_tx_msg_cancel_revenue',
-    'create_tx_msg_register_revenue',
-    'create_tx_msg_update_revenue',
-    'create_tx_msg_delegate',
-    'create_tx_msg_begin_redelegate',
-    'create_tx_msg_undelegate',
-    'create_tx_msg_withdraw_delegator_reward',
-    'create_tx_msg_multiple_withdraw_delegator_reward',
-    'create_tx_msg_withdraw_validator_commission',
-    'create_tx_msg_set_withdraw_address',
-    'create_tx_msg_edit_validator',
+    "create_tx_msg_vote",
+    "create_tx_ibc_msg_transfer",
+    "create_message_send",
+    "create_tx_raw_eip712",
+    "signature_to_web3_extension",
+    "Chain",
+    "Fee",
+    "Sender",
+    "TxGeneratedBase",
+    "TxGenerated",
+    "create_tx_msg_stake_authorization",
+    "create_tx_msg_stake_revoke_authorization",
+    "create_tx_msg_convert_coin",
+    "create_tx_msg_convert_erc20",
+    "create_tx_msg_cancel_revenue",
+    "create_tx_msg_register_revenue",
+    "create_tx_msg_update_revenue",
+    "create_tx_msg_delegate",
+    "create_tx_msg_begin_redelegate",
+    "create_tx_msg_undelegate",
+    "create_tx_msg_withdraw_delegator_reward",
+    "create_tx_msg_multiple_withdraw_delegator_reward",
+    "create_tx_msg_withdraw_validator_commission",
+    "create_tx_msg_set_withdraw_address",
+    "create_tx_msg_edit_validator",
 ]
 
 
@@ -203,7 +203,7 @@ def create_tx_raw_eip712(
     """Create a message with raw EIP712 transaction."""
     body.extension_options.append(create_any_message(extension))
 
-    return create_tx_raw(bytes(body), bytes(auth_info), [b''])
+    return create_tx_raw(bytes(body), bytes(auth_info), [b""])
 
 
 # web3Extension.ts

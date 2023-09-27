@@ -22,9 +22,9 @@ from evmos.proto.autogen.py.cosmos.tx.v1beta1 import AuthInfo, SignDoc, TxBody
 class ProtoMsgTypes(str, Enum):
     """Type URLs for supported proto messages."""
 
-    MSG_SEND = '/cosmos.bank.v1beta1.MsgSend'
-    MSG_VOTE = '/cosmos.gov.v1beta1.MsgVote'
-    MSG_DELEGATE = '/cosmos.staking.v1beta1.MsgDelegate'
+    MSG_SEND = "/cosmos.bank.v1beta1.MsgSend"
+    MSG_VOTE = "/cosmos.gov.v1beta1.MsgVote"
+    MSG_DELEGATE = "/cosmos.staking.v1beta1.MsgDelegate"
 
 
 def _protobuf_type_url_to_amino_type(type_url: str) -> MsgTypes:
@@ -36,7 +36,7 @@ def _protobuf_type_url_to_amino_type(type_url: str) -> MsgTypes:
     try:
         return mapping[ProtoMsgTypes(type_url)]
     except KeyError:
-        raise NotImplementedError('Invalid Protobuf message type url received')
+        raise NotImplementedError("Invalid Protobuf message type url received")
 
 
 def _convert_protobuf_msg_to_amino_msg(obj: Message) -> dict[str, Any]:
@@ -67,12 +67,12 @@ def decode_protobuf_sign_doc(bytes_src: bytes) -> EIPToSign:
     auth_info = AuthInfo().parse(sign_doc.auth_info_bytes)
 
     if not tx_body.messages:
-        raise ValueError('Expected a message in Protobuf SignDoc but received empty.')
+        raise ValueError("Expected a message in Protobuf SignDoc but received empty.")
     elif len(tx_body.messages) > 1:
         # Enforce single message for now
         raise NotImplementedError(
-            'Expected single message in Protobuf SignDoc '
-            f'but received {len(tx_body.messages)}.'
+            "Expected single message in Protobuf SignDoc "
+            f"but received {len(tx_body.messages)}."
         )
 
     first_msg = tx_body.messages[0]
@@ -80,8 +80,8 @@ def decode_protobuf_sign_doc(bytes_src: bytes) -> EIPToSign:
     # Enforce single signer for now
     if len(auth_info.signer_infos) != 1:
         raise NotImplementedError(
-            'Expected single signer in Protobuf SignDoc '
-            f'but received {len(auth_info.signer_infos)}.'
+            "Expected single signer in Protobuf SignDoc "
+            f"but received {len(auth_info.signer_infos)}."
         )
 
     signer = auth_info.signer_infos[0]
@@ -89,14 +89,14 @@ def decode_protobuf_sign_doc(bytes_src: bytes) -> EIPToSign:
     # Enforce presence of fee
     if not auth_info.fee:
         raise ValueError(
-            'Expected fee object to be included in payload, got undefined',
+            "Expected fee object to be included in payload, got undefined",
         )
 
     # Enforce single fee
     if len(auth_info.fee.amount) != 1:
         raise ValueError(
-            'Expected single fee in Protobuf SignDoc '
-            f'but received {len(auth_info.fee.amount)}'
+            "Expected single fee in Protobuf SignDoc "
+            f"but received {len(auth_info.fee.amount)}"
         )
     amount = auth_info.fee.amount[0]
 
@@ -111,8 +111,8 @@ def decode_protobuf_sign_doc(bytes_src: bytes) -> EIPToSign:
 
     # Convert Protobuf message to expected Amino type
     amino_msg = {
-        'type': _protobuf_type_url_to_amino_type(first_msg.type_url),
-        'value': _convert_protobuf_msg_to_amino_msg(proto_msg),
+        "type": _protobuf_type_url_to_amino_type(first_msg.type_url),
+        "value": _convert_protobuf_msg_to_amino_msg(proto_msg),
     }
 
     # Use the feePayer from the message if unset in body

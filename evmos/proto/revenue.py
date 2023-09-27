@@ -23,7 +23,7 @@ def create_msg_cancel_revenue(
     )
     return MessageGenerated(
         message=msg,
-        path='evmos.revenue.v1.MsgCancelRevenue',
+        path="evmos.revenue.v1.MsgCancelRevenue",
     )
 
 
@@ -45,7 +45,7 @@ def create_msg_register_revenue(
     )
     return MessageGenerated(
         message=msg,
-        path='evmos.revenue.v1.MsgRegisterRevenue',
+        path="evmos.revenue.v1.MsgRegisterRevenue",
     )
 
 
@@ -65,5 +65,5 @@ def create_msg_update_revenue(
     )
     return MessageGenerated(
         message=msg,
-        path='evmos.revenue.v1.MsgUpdateRevenue',
+        path="evmos.revenue.v1.MsgUpdateRevenue",
     )

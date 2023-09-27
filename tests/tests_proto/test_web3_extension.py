@@ -69,4 +69,4 @@ def test_create_tx_raw():
     # fmt: on
     message = create_tx_raw(body, auth, sig)
     assert bytes(message.message) == tx_raw
-    assert message.path == 'cosmos.tx.v1beta1.TxRaw'
+    assert message.path == "cosmos.tx.v1beta1.TxRaw"

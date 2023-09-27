@@ -18,16 +18,16 @@ from evmos.proto.transactions import (
 
 def test_create_body():
     msg_send = create_msg_send(
-        'evmos18lw704zeyg5zs098lq7x6ypfkfjqlzzln5qh89',
-        'evmos1ndfagggdkgv9vc7wha5gj2zzrnyqd3r704lr4q',
-        '69420',
-        'aphoton',
+        "evmos18lw704zeyg5zs098lq7x6ypfkfjqlzzln5qh89",
+        "evmos1ndfagggdkgv9vc7wha5gj2zzrnyqd3r704lr4q",
+        "69420",
+        "aphoton",
     )
-    res = create_body(msg_send, 'this is a test')
+    res = create_body(msg_send, "this is a test")
     assert res.to_pydict(casing=casing.snake_case) == {
-        'messages': [
+        "messages": [
             {
-                'type_url': '/cosmos.bank.v1beta1.MsgSend',
+                "type_url": "/cosmos.bank.v1beta1.MsgSend",
                 # fmt: off
                 'value': bytes(
                     [
@@ -45,20 +45,20 @@ def test_create_body():
                 # fmt: on
             },
         ],
-        'memo': 'this is a test',
+        "memo": "this is a test",
         # 'extension_options': [],  # default
         # 'non_critical_extension_options': [],  # default
     }
 
 
 def test_create_fee():
-    value = '20'
-    denom = 'aphoton'
+    value = "20"
+    denom = "aphoton"
     gas = 20000
     fee = create_fee(value, denom, gas)
     assert fee.to_pydict(casing=casing.snake_case) == {
-        'amount': [{'amount': value, 'denom': denom}],
-        'gas_limit': gas,
+        "amount": [{"amount": value, "denom": denom}],
+        "gas_limit": gas,
     }
 
 
@@ -73,10 +73,10 @@ def test_create_signer_info():
     )
     # fmt: on
     sequence = 0
-    info = create_signer_info('ethsecp256k1', pubkey, sequence, SIGN_DIRECT)
+    info = create_signer_info("ethsecp256k1", pubkey, sequence, SIGN_DIRECT)
     assert info.to_pydict(casing=casing.snake_case) == {
-        'public_key': {
-            'type_url': '/ethermint.crypto.v1.ethsecp256k1.PubKey',
+        "public_key": {
+            "type_url": "/ethermint.crypto.v1.ethsecp256k1.PubKey",
             # value: 'CiMKIQKIsfUxuHhx28A3KVGHJVyuS6DEvDfKcmEFshQK/Q5pFw=='
             # fmt: off
             'value': bytes(
@@ -88,7 +88,7 @@ def test_create_signer_info():
             ),
             # fmt: on
         },
-        'mode_info': {'single': {'mode': 1}},
+        "mode_info": {"single": {"mode": 1}},
         # 'sequence': 0,  # default
     }
 
@@ -104,18 +104,18 @@ def test_create_auth_info():
     )
     # fmt: on
     sequence = 0
-    info = create_signer_info('ethsecp256k1', pubkey, sequence, SIGN_DIRECT)
-    value = '20'
-    denom = 'aphoton'
+    info = create_signer_info("ethsecp256k1", pubkey, sequence, SIGN_DIRECT)
+    value = "20"
+    denom = "aphoton"
     gas = 20000
     fee = create_fee(value, denom, gas)
 
     msg = create_auth_info(info, fee)
     assert msg.to_pydict(casing=casing.snake_case) == {
-        'signer_infos': [
+        "signer_infos": [
             {
-                'public_key': {
-                    'type_url': '/ethermint.crypto.v1.ethsecp256k1.PubKey',
+                "public_key": {
+                    "type_url": "/ethermint.crypto.v1.ethsecp256k1.PubKey",
                     # value: 'CiMKIQKIsfUxuHhx28A3KVGHJVyuS6DEvDfKcmEFshQK/Q5pFw=='
                     # fmt: off
                     'value': bytes(
@@ -127,25 +127,25 @@ def test_create_auth_info():
                     ),
                     # fmt: on
                 },
-                'mode_info': {'single': {'mode': SIGN_DIRECT}},
+                "mode_info": {"single": {"mode": SIGN_DIRECT}},
                 # 'sequence': sequence,  # default
             },
         ],
-        'fee': {
-            'amount': [{'amount': value, 'denom': denom}],
-            'gas_limit': gas,
+        "fee": {
+            "amount": [{"amount": value, "denom": denom}],
+            "gas_limit": gas,
         },
     }
 
 
 def test_create_sig_doc():
     msg_send = create_msg_send(
-        'evmos18lw704zeyg5zs098lq7x6ypfkfjqlzzln5qh89',
-        'evmos1ndfagggdkgv9vc7wha5gj2zzrnyqd3r704lr4q',
-        '69420',
-        'aphoton',
+        "evmos18lw704zeyg5zs098lq7x6ypfkfjqlzzln5qh89",
+        "evmos1ndfagggdkgv9vc7wha5gj2zzrnyqd3r704lr4q",
+        "69420",
+        "aphoton",
     )
-    body = create_body(msg_send, 'this is a test')
+    body = create_body(msg_send, "this is a test")
 
     # fmt: off
     pubkey = bytes(
@@ -157,15 +157,15 @@ def test_create_sig_doc():
     )
     # fmt: on
     sequence = 0
-    info = create_signer_info('ethsecp256k1', pubkey, sequence, SIGN_DIRECT)
-    value = '20'
-    denom = 'aphoton'
+    info = create_signer_info("ethsecp256k1", pubkey, sequence, SIGN_DIRECT)
+    value = "20"
+    denom = "aphoton"
     gas = 20000
     fee = create_fee(value, denom, gas)
 
     auth_info = create_auth_info(info, fee)
 
-    chain_id = 'evmos-9000_1'
+    chain_id = "evmos-9000_1"
 
     account_number = 0
 
@@ -213,47 +213,47 @@ def test_create_sig_doc():
             ]
         ),
         # fmt: on
-        'chain_id': chain_id,
+        "chain_id": chain_id,
         # 'account_number': account_number,  # default
     }
 
 
 def test_valid_eip712():
     msg = create_msg_send(
-        'ethm1tfegf50n5xl0hd5cxfzjca3ylsfpg0fned5gqm',
-        'ethm1tfegf50n5xl0hd5cxfzjca3ylsfpg0fned5gqm',
-        '1',
-        'aphoton',
+        "ethm1tfegf50n5xl0hd5cxfzjca3ylsfpg0fned5gqm",
+        "ethm1tfegf50n5xl0hd5cxfzjca3ylsfpg0fned5gqm",
+        "1",
+        "aphoton",
     )
     tx = create_transaction(
         msg,
-        '',
-        '20',
-        'aphoton',
+        "",
+        "20",
+        "aphoton",
         200000,
-        'ethsecp256',
-        'AgTw+4v0daIrxsNSW4FcQ+IoingPseFwHO1DnssyoOqZ',
+        "ethsecp256",
+        "AgTw+4v0daIrxsNSW4FcQ+IoingPseFwHO1DnssyoOqZ",
         1,
         9,
-        '',
+        "",
     )
     assert base64.b64encode(bytes(tx.legacy_amino.body)) == (
-        b'CogBChwvY29zbW9zLmJhbmsudjFiZXRhMS5Nc2dTZW5kEmgKK2V0aG0xdGZlZ'
-        b'2Y1MG41eGwwaGQ1Y3hmempjYTN5bHNmcGcwZm5lZDVncW0SK2V0aG0xdGZlZ2Y'
-        b'1MG41eGwwaGQ1Y3hmempjYTN5bHNmcGcwZm5lZDVncW0aDAoHYXBob3RvbhIBMQ=='
+        b"CogBChwvY29zbW9zLmJhbmsudjFiZXRhMS5Nc2dTZW5kEmgKK2V0aG0xdGZlZ"
+        b"2Y1MG41eGwwaGQ1Y3hmempjYTN5bHNmcGcwZm5lZDVncW0SK2V0aG0xdGZlZ2Y"
+        b"1MG41eGwwaGQ1Y3hmempjYTN5bHNmcGcwZm5lZDVncW0aDAoHYXBob3RvbhIBMQ=="
     )
     assert base64.b64encode(bytes(tx.legacy_amino.auth_info)) == (
-        b'ClkKTwooL2V0aGVybWludC5jcnlwdG8udjEuZXRoc2VjcDI1NmsxLlB1YktleRIj'
-        b'CiECBPD7i/R1oivGw1JbgVxD4iiKeA+x4XAc7UOeyzKg6pkSBAoCCH8YARITCg0K'
-        b'B2FwaG90b24SAjIwEMCaDA=='
+        b"ClkKTwooL2V0aGVybWludC5jcnlwdG8udjEuZXRoc2VjcDI1NmsxLlB1YktleRIj"
+        b"CiECBPD7i/R1oivGw1JbgVxD4iiKeA+x4XAc7UOeyzKg6pkSBAoCCH8YARITCg0K"
+        b"B2FwaG90b24SAjIwEMCaDA=="
     )
     assert base64.b64encode(bytes(tx.sign_direct.body)) == (
-        b'CogBChwvY29zbW9zLmJhbmsudjFiZXRhMS5Nc2dTZW5kEmgKK2V0aG0xdGZlZ2Y1'
-        b'MG41eGwwaGQ1Y3hmempjYTN5bHNmcGcwZm5lZDVncW0SK2V0aG0xdGZlZ2Y1MG41'
-        b'eGwwaGQ1Y3hmempjYTN5bHNmcGcwZm5lZDVncW0aDAoHYXBob3RvbhIBMQ=='
+        b"CogBChwvY29zbW9zLmJhbmsudjFiZXRhMS5Nc2dTZW5kEmgKK2V0aG0xdGZlZ2Y1"
+        b"MG41eGwwaGQ1Y3hmempjYTN5bHNmcGcwZm5lZDVncW0SK2V0aG0xdGZlZ2Y1MG41"
+        b"eGwwaGQ1Y3hmempjYTN5bHNmcGcwZm5lZDVncW0aDAoHYXBob3RvbhIBMQ=="
     )
     assert base64.b64encode(bytes(tx.sign_direct.auth_info)) == (
-        b'ClkKTwooL2V0aGVybWludC5jcnlwdG8udjEuZXRoc2VjcDI1NmsxLlB1YktleRIj'
-        b'CiECBPD7i/R1oivGw1JbgVxD4iiKeA+x4XAc7UOeyzKg6pkSBAoCCAEYARITCg0K'
-        b'B2FwaG90b24SAjIwEMCaDA=='
+        b"ClkKTwooL2V0aGVybWludC5jcnlwdG8udjEuZXRoc2VjcDI1NmsxLlB1YktleRIj"
+        b"CiECBPD7i/R1oivGw1JbgVxD4iiKeA+x4XAc7UOeyzKg6pkSBAoCCAEYARITCg0K"
+        b"B2FwaG90b24SAjIwEMCaDA=="
     )

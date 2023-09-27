@@ -12,8 +12,8 @@ import betterproto
 class PublicKey(betterproto.Message):
     """PublicKey defines the keys available for use with Tendermint Validators"""
 
-    ed25519: bytes = betterproto.bytes_field(1, group='sum')
-    secp256_k1: bytes = betterproto.bytes_field(2, group='sum')
+    ed25519: bytes = betterproto.bytes_field(1, group="sum")
+    secp256_k1: bytes = betterproto.bytes_field(2, group="sum")
 
 
 @dataclass(eq=False, repr=False)
@@ -29,7 +29,7 @@ class ValueOp(betterproto.Message):
     key: bytes = betterproto.bytes_field(1)
     """Encoded in ProofOp.Key."""
 
-    proof: 'Proof' = betterproto.message_field(2)
+    proof: "Proof" = betterproto.message_field(2)
     """To encode in ProofOp.Data"""
 
 
@@ -57,4 +57,4 @@ class ProofOp(betterproto.Message):
 class ProofOps(betterproto.Message):
     """ProofOps is Merkle proof defined by the list of ProofOps"""
 
-    ops: List['ProofOp'] = betterproto.message_field(1)
+    ops: List["ProofOp"] = betterproto.message_field(1)
