@@ -33,17 +33,17 @@ def create_msg_grant(
     )
     return MessageGenerated(
         message=msg,
-        path='cosmos.authz.v1beta1.MsgGrant',
+        path="cosmos.authz.v1beta1.MsgGrant",
     )
 
 
 class RevokeMessages(str, Enum):
     """Revoke message paths."""
 
-    REVOKE_MSG_DELEGATE = '/cosmos.staking.v1beta1.MsgDelegate'
+    REVOKE_MSG_DELEGATE = "/cosmos.staking.v1beta1.MsgDelegate"
     """Revoke delegate message path."""
     REVOKE_MSG_WITHDRAW_DELEGATOR_REWARDS = (
-        '/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward'
+        "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
     )
     """Revoke delegate and withdraw rewards message path."""
 
@@ -61,7 +61,7 @@ def create_msg_revoke(
     )
     return MessageGenerated(
         message=msg,
-        path='cosmos.authz.v1beta1.MsgRevoke',
+        path="cosmos.authz.v1beta1.MsgRevoke",
     )
 
 
@@ -90,5 +90,5 @@ def create_stake_authorization(
 
     return MessageGenerated(
         message=msg,
-        path='cosmos.staking.v1beta1.StakeAuthorization',
+        path="cosmos.staking.v1beta1.StakeAuthorization",
     )

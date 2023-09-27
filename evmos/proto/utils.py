@@ -6,7 +6,7 @@ from typing import Generic, TypeVar
 from betterproto import Message
 from betterproto.lib.google.protobuf import Any as GoogleAny
 
-_M = TypeVar('_M', bound=Message)
+_M = TypeVar("_M", bound=Message)
 
 
 @dataclass
@@ -26,6 +26,6 @@ def create_any_message(msg: MessageGenerated[Message]) -> GoogleAny:
         :class:`~betterproto.lib.google.protobuf.Any`
     """
     return GoogleAny(
-        type_url=f'/{msg.path}',
+        type_url=f"/{msg.path}",
         value=bytes(msg.message),
     )

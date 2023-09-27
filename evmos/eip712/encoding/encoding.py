@@ -22,9 +22,9 @@ def decode_sign_doc_to_typed_data(byte_src: bytes) -> EIPToSign:
             return decode_protobuf_sign_doc(byte_src)
         except ValueError as proto_exc:
             raise ValueError(
-                'Could not cast byte_src to either StdSignDoc or SignDoc:\n'
-                f'Amino: {amino_exc!r}\n'
-                f'Protobuf: {proto_exc!r}'
+                "Could not cast byte_src to either StdSignDoc or SignDoc:\n"
+                f"Amino: {amino_exc!r}\n"
+                f"Protobuf: {proto_exc!r}"
             )
 
 
@@ -36,22 +36,22 @@ def hash_eip712(eip712: EIPToSign) -> dict[str, Any]:
     try:
         eip712_domain = hash_domain(
             {
-                'primaryType': 'EIP712Domain',
-                'domain': asdict(eip712.domain),
-                'types': eip712.types,
+                "primaryType": "EIP712Domain",
+                "domain": asdict(eip712.domain),
+                "types": eip712.types,
             }
         )
         eip712_hash = hash_eip712_message(
             {
-                'primaryType': eip712.primaryType,
-                'message': eip712.message,
-                'types': eip712.types,
+                "primaryType": eip712.primaryType,
+                "message": eip712.message,
+                "types": eip712.types,
             }
         )
 
         return {
-            'domain': eip712_domain,
-            'message': eip712_hash,
+            "domain": eip712_domain,
+            "message": eip712_hash,
         }
     except (ValueError, TypeError, KeyError, IndexError) as e:
-        raise ValueError('Could not hash EIP-712 object') from e
+        raise ValueError("Could not hash EIP-712 object") from e
